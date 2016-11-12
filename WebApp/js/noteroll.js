@@ -84,7 +84,11 @@ function NoteRoll () {
   }
 
   this.exportNotes = function () {
+    var noteInfo = this.notes;
     console.log(this.notes);
+
+    // TODO : send this string to the backend as a JSON
+    var objStr = JSON.stringify(noteInfo);
   }
 }
 
