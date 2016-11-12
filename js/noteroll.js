@@ -1,4 +1,5 @@
 // global stuff
+TweenLite.defaultEase = Linear.easeNone;
 // the pitch value of all black notes
 var blackNotes = [1,4,6,9,11,13,16,18,21,23,25,28,30,33,35,37,40,42,45,47,49,52,54,57,59,61,64,66,69,71,73,76,78,81,83,85];
 
@@ -11,7 +12,8 @@ function NoteRoll () {
   this.notes = [];
   this.keys = [];
   this.p = getProperties();
-  this.playingNotes = [];
+  this.playingNotes = [88];
+  this.startNotes = [];
 
   this.createKeys = function () {
     var keys = [];
@@ -26,7 +28,9 @@ function NoteRoll () {
   this.keys = this.createKeys();
 
   this.playNote  = function (pitch) {
-    var note = createNoteGraphic ();
+    var note = new Note(pitch, new Date(), null, null);
+    note.startTime = new Date();
+    note.graphic =  new createNoteGraphic();
     var x, y, width, height;
 
 
@@ -36,18 +40,83 @@ function NoteRoll () {
       x = pitchToXPos[pitch] * p.noteWidth;
     }
 
-    document.body.appendChild(note);
+    document.body.appendChild(note.graphic);
+    this.playingNotes[pitch] = note;
     // this.playingNotes.push(note);
-    TweenLite.to(note, 0, {
+    TweenLite.to(note.graphic, 0, {
       x: x,
       y: p.viewHeight,
       width: p.noteWidth,
+      height: 3000,
     });
 
-    TweenLite.to(note, p.noteSpeed, {
-      y: -100,
+    note.tl.to(note.graphic, p.noteSpeed, {
+      y: 0,
     });
   }
+
+  this.stopNote = function (pitch) {
+    var note = this.playingNotes[pitch];
+    console.log(note);
+    note.stopTime = new Date();
+    note.duration = (note.stopTime - note.startTime) / 1000;
+    // change he height of note to proper length
+    TweenLite.to(this.playingNotes[pitch].graphic, 0, {
+      height: note.duration * this.p.yScale,
+    });
+
+    // animate the note off the screen
+    note.tl.to(note.graphic, note.duration, {
+      y: 0 - note.duration * this.p.yScale,
+    });
+
+  }
+}
+
+
+function Note(pitch, startTime, duration, velocity, graphic = null) {
+  this.pitch = pitch;
+  this.startTime = startTime;
+  this.duration = duration;
+  this.velocity = velocity;
+  this.graphic = null;
+  this.tl = new TimelineMax();
+  // this.noteColor = getRandomColor();
+
+  // if (this.velocity < .1) {
+  //   this.noteColor = "#99ff99";
+  // } else if (this.velocity < .2) {
+  //   this.noteColor = "#80ff80";
+  // } else if (this.velocity < .3) {
+  //   this.noteColor = "#66ff66";
+  // } else if (this.velocity < .4) {
+  //   this.noteColor = "#00ff00";
+  // } else if (this.velocity < .5) {
+  //   this.noteColor = "#00e600";
+  // } else if (this.velocity < .6) {
+  //   this.noteColor = "#00cc00";
+  // } else if (this.velocity < .7) {
+  //   this.noteColor = "#00b300";
+  // } else if (this.velocity < .8) {
+  //   this.noteColor = "#ff0066";
+  // } else if (this.velocity < .9) {
+  //   this.noteColor = "#ff0000";
+  // } else {
+  //   this.noteColor = "#cc0000";
+  // }
+
+  this.initialX = null;
+  this.len = null;
+
+
+  // animation properties
+  this.getAnimationProperties = function(p) {
+    this.initialX = pitchToXPos[this.pitch] * p.noteWidth;
+    this.len = this.duration * p.yScale;
+  }
+
+  // this.stopTime = startTime + noteSpeed;
+
 }
 
 

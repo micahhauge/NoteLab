@@ -24,7 +24,7 @@ body {
 	height: 50px;
 	position: absolute;
 	border-radius: 7px;
-	background-color: #ffffff;
+	background-color: #eeccff;
   pointer-events:none;
 	/*visibility: hidden;*/
 }

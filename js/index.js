@@ -88,6 +88,7 @@ function noteOn(noteNumber) {
 }
 
 function noteOff(noteNumber) {
+  nr.stopNote(noteNumber - 21);
   var position = activeNotes.indexOf(noteNumber);
   if (position!=-1) {
     activeNotes.splice(position,1);
