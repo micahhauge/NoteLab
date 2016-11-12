@@ -7,6 +7,9 @@ var release=0.05;   // release speed
 var portamento=0.05;  // portamento/glide speed
 var activeNotes = []; // the stack of actively-pressed keys
 
+
+var isRecording = true;
+
 window.addEventListener('load', function() {
   // patch up prefixes
   window.AudioContext=window.AudioContext||window.webkitAudioContext;
@@ -25,7 +28,15 @@ window.addEventListener('load', function() {
   envelope.connect(context.destination);
   envelope.gain.value = 0.0;  // Mute the sound
   oscillator.start(0);  // Go ahead and start up the oscillator
-} );
+
+
+  // NoteRoll
+  nr = new NoteRoll();
+
+
+  // make the keyboard
+
+});
 
 function onMIDIInit(midi) {
   midiAccess = midi;
@@ -52,7 +63,7 @@ function MIDIMessageEventHandler(event) {
         console.log(event.data[1]);
         noteOn(event.data[1]);
         return;
-      }
+    }
       // if velocity == 0, fall thru: it's a note-off.  MIDI's weird, y'all.
     case 0x80:
       noteOff(event.data[1]);
@@ -70,6 +81,10 @@ function noteOn(noteNumber) {
   oscillator.frequency.setTargetAtTime( frequencyFromNoteNumber(noteNumber), 0, portamento );
   envelope.gain.cancelScheduledValues(0);
   envelope.gain.setTargetAtTime(1.0, 0, attack);
+  TweenLite.to(nr.keys[noteNumber - 21].graphic, .1, {
+    backgroundColor: '#00ffff',
+  });
+  nr.playNote(noteNumber - 21);
 }
 
 function noteOff(noteNumber) {
@@ -77,6 +92,9 @@ function noteOff(noteNumber) {
   if (position!=-1) {
     activeNotes.splice(position,1);
   }
+  TweenLite.to(nr.keys[noteNumber - 21].graphic, .1, {
+    backgroundColor: nr.keys[noteNumber - 21].keyColor,
+  });
   if (activeNotes.length==0) {  // shut off the envelope
     envelope.gain.cancelScheduledValues(0);
     envelope.gain.setTargetAtTime(0.0, 0, release );
