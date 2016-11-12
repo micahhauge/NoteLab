@@ -14,12 +14,13 @@ function NoteRoll () {
   this.p = getProperties();
   this.playingNotes = [88];
   this.startNotes = [];
+  this.recording = true;
+  this.globalStartTime = null;
 
   this.createKeys = function () {
     var keys = [];
     for (var i = 0; i < 88; i++) {
       keys.push(new KeyGraphic(i, p));
-      // console.log('push', i);
     }
     return keys;
   }
@@ -75,7 +76,59 @@ function NoteRoll () {
       document.body.removeChild(note.graphic);
     })
 
+
+    if (this.recording) {
+      console.log('asdf');
+      this.notes.push(new Note(pitch, (note.startTime - this.globalStartTime) / 1000, note.duration))
+      console.log(this.notes);
+    }
+
   }
+}
+
+
+function Note(pitch, startTime, duration, velocity) {
+  this.pitch = pitch;
+  this.startTime = startTime;
+  this.duration = duration;
+  this.velocity = velocity;
+  this.graphic = null;
+  // this.noteColor = getRandomColor();
+
+  if (this.velocity < .1) {
+    this.noteColor = "#99ff99";
+  } else if (this.velocity < .2) {
+    this.noteColor = "#80ff80";
+  } else if (this.velocity < .3) {
+    this.noteColor = "#66ff66";
+  } else if (this.velocity < .4) {
+    this.noteColor = "#00ff00";
+  } else if (this.velocity < .5) {
+    this.noteColor = "#00e600";
+  } else if (this.velocity < .6) {
+    this.noteColor = "#00cc00";
+  } else if (this.velocity < .7) {
+    this.noteColor = "#00b300";
+  } else if (this.velocity < .8) {
+    this.noteColor = "#ff0066";
+  } else if (this.velocity < .9) {
+    this.noteColor = "#ff0000";
+  } else {
+    this.noteColor = "#cc0000";
+  }
+
+  this.initialX = null;
+  this.len = null;
+
+
+  // animation properties
+  this.getAnimationProperties = function(p) {
+    this.initialX = pitchToXPos[this.pitch] * p.noteWidth;
+    this.len = this.duration * p.yScale;
+  }
+
+  // this.stopTime = startTime + noteSpeed;
+
 }
 
 
@@ -88,7 +141,6 @@ function LiveNote(pitch, startTime, duration, velocity, graphic = null) {
   this.tl = new TimelineMax();
   // this.noteColor = getRandomColor();
 
-  console.log('velocirty' + velocity);
 
   if (this.velocity < .1) {
     this.noteColor = "#99ff99";
