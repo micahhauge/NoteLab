@@ -21,23 +21,24 @@ function NoteRoll () {
       keys.push(new KeyGraphic(i, p));
       // console.log('push', i);
     }
-    console.log(keys);
     return keys;
   }
 
   this.keys = this.createKeys();
 
-  this.playNote  = function (pitch) {
-    var note = new Note(pitch, new Date(), null, null);
+  this.playNote  = function (pitch, velocity) {
+    var note = new Note(pitch, new Date(), null, velocity);
     note.startTime = new Date();
     note.graphic =  new createNoteGraphic();
     var x, y, width, height;
 
 
     if (isBlack(pitch)) {
-      x = pitchToXPos[pitch] * p.noteWidth - .4 * p.noteWidth;
+      x = pitchToXPos[pitch] * p.noteWidth - .3 * p.noteWidth;
+      width = p.noteWidth * .6;
     } else {
       x = pitchToXPos[pitch] * p.noteWidth;
+      width = p.noteWidth;
     }
 
     document.body.appendChild(note.graphic);
@@ -46,8 +47,9 @@ function NoteRoll () {
     TweenLite.to(note.graphic, 0, {
       x: x,
       y: p.viewHeight,
-      width: p.noteWidth,
+      width: width,
       height: 3000,
+      backgroundColor: note.noteColor,
     });
 
     note.tl.to(note.graphic, p.noteSpeed, {
@@ -57,7 +59,6 @@ function NoteRoll () {
 
   this.stopNote = function (pitch) {
     var note = this.playingNotes[pitch];
-    console.log(note);
     note.stopTime = new Date();
     note.duration = (note.stopTime - note.startTime) / 1000;
     // change he height of note to proper length
@@ -69,6 +70,10 @@ function NoteRoll () {
     note.tl.to(note.graphic, note.duration, {
       y: 0 - note.duration * this.p.yScale,
     });
+
+    note.tl.call(function () {
+      document.body.removeChild(note.graphic);
+    })
 
   }
 }
@@ -83,27 +88,29 @@ function Note(pitch, startTime, duration, velocity, graphic = null) {
   this.tl = new TimelineMax();
   // this.noteColor = getRandomColor();
 
-  // if (this.velocity < .1) {
-  //   this.noteColor = "#99ff99";
-  // } else if (this.velocity < .2) {
-  //   this.noteColor = "#80ff80";
-  // } else if (this.velocity < .3) {
-  //   this.noteColor = "#66ff66";
-  // } else if (this.velocity < .4) {
-  //   this.noteColor = "#00ff00";
-  // } else if (this.velocity < .5) {
-  //   this.noteColor = "#00e600";
-  // } else if (this.velocity < .6) {
-  //   this.noteColor = "#00cc00";
-  // } else if (this.velocity < .7) {
-  //   this.noteColor = "#00b300";
-  // } else if (this.velocity < .8) {
-  //   this.noteColor = "#ff0066";
-  // } else if (this.velocity < .9) {
-  //   this.noteColor = "#ff0000";
-  // } else {
-  //   this.noteColor = "#cc0000";
-  // }
+  console.log('velocirty' + velocity);
+
+  if (this.velocity < .1) {
+    this.noteColor = "#99ff99";
+  } else if (this.velocity < .2) {
+    this.noteColor = "#80ff80";
+  } else if (this.velocity < .3) {
+    this.noteColor = "#66ff66";
+  } else if (this.velocity < .4) {
+    this.noteColor = "#00ff00";
+  } else if (this.velocity < .5) {
+    this.noteColor = "#00e600";
+  } else if (this.velocity < .6) {
+    this.noteColor = "#00cc00";
+  } else if (this.velocity < .7) {
+    this.noteColor = "#00b300";
+  } else if (this.velocity < .8) {
+    this.noteColor = "#ff0066";
+  } else if (this.velocity < .9) {
+    this.noteColor = "#ff0000";
+  } else {
+    this.noteColor = "#cc0000";
+  }
 
   this.initialX = null;
   this.len = null;

@@ -26,5 +26,6 @@ body {
 	border-radius: 7px;
 	background-color: #eeccff;
   pointer-events:none;
+  z-index: -2; 
 	/*visibility: hidden;*/
 }

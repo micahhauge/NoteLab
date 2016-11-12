@@ -60,8 +60,8 @@ function MIDIMessageEventHandler(event) {
   switch (event.data[0] & 0xf0) {
     case 0x90:
       if (event.data[2]!=0) {  // if velocity != 0, this is a note-on message
-        console.log(event.data[1]);
-        noteOn(event.data[1]);
+        // console.log(event.data[1]);
+        noteOn(event.data[1], event.data[2] / 127);
         return;
     }
       // if velocity == 0, fall thru: it's a note-off.  MIDI's weird, y'all.
@@ -75,16 +75,19 @@ function frequencyFromNoteNumber( note ) {
   return 440 * Math.pow(2,(note-69)/12);
 }
 
-function noteOn(noteNumber) {
+function noteOn(noteNumber, velocity) {
+  console.log("V: ", velocity);
   activeNotes.push( noteNumber );
   oscillator.frequency.cancelScheduledValues(0);
   oscillator.frequency.setTargetAtTime( frequencyFromNoteNumber(noteNumber), 0, portamento );
   envelope.gain.cancelScheduledValues(0);
   envelope.gain.setTargetAtTime(1.0, 0, attack);
+
+
   TweenLite.to(nr.keys[noteNumber - 21].graphic, .1, {
     backgroundColor: '#00ffff',
   });
-  nr.playNote(noteNumber - 21);
+  nr.playNote(noteNumber - 21, velocity);
 }
 
 function noteOff(noteNumber) {
