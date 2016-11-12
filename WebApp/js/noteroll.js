@@ -89,6 +89,10 @@ function NoteRoll () {
 
     // TODO : send this string to the backend as a JSON
     var objStr = JSON.stringify(noteInfo);
+	// SAVING MIDI IN TMP FILE
+	saveMidi(objStr,'tmp');
+	// THIS IS HOW TO LOAD THE FILE BACK
+	// loadMidi('tmp')
   }
 }
 
