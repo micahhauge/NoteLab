@@ -112,6 +112,7 @@ function noteOff(noteNumber) {
 function setupTimer () {
   nr.globalStartTime = new Date();
   var timerText = document.getElementById('timer');
+  var stop = document.getElementById('stop');
   var seconds = 0, minutes = 0, hours = 0, t;
 
   function add() {
@@ -131,6 +132,12 @@ function setupTimer () {
   function timer() {
       nr.recording = true;
       t = setTimeout(add, 1000);
+  }
+
+  /* Stop button */
+  stop.onclick = function() {
+    clearTimeout(t);
+    nr.exportNotes();
   }
 
 

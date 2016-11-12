@@ -14,7 +14,7 @@ function NoteRoll () {
   this.p = getProperties();
   this.playingNotes = [88];
   this.startNotes = [];
-  this.recording = true;
+  this.recording = false;
   this.globalStartTime = null;
 
   this.createKeys = function () {
@@ -78,11 +78,13 @@ function NoteRoll () {
 
 
     if (this.recording) {
-      console.log('asdf');
-      this.notes.push(new Note(pitch, (note.startTime - this.globalStartTime) / 1000, note.duration))
-      console.log(this.notes);
+      this.notes.push(new Note(pitch, (note.startTime - this.globalStartTime) / 1000, note.duration, note.velocity))
+      console.log('added note');
     }
+  }
 
+  this.exportNotes = function () {
+    console.log(this.notes);
   }
 }
 
