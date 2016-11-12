@@ -34,9 +34,8 @@ window.addEventListener('load', function() {
   nr = new NoteRoll();
 
 
-  //setup timer
-  alert('hi');
-  setupTimer();
+  // make the keyboard
+
 });
 
 function onMIDIInit(midi) {
@@ -107,39 +106,4 @@ function noteOff(noteNumber) {
     oscillator.frequency.cancelScheduledValues(0);
     oscillator.frequency.setTargetAtTime( frequencyFromNoteNumber(activeNotes[activeNotes.length-1]), 0, portamento );
   }
-}
-
-
-function setupTimer () {
-  alert('hi')
-  var start = document.getElementById('start').onClick = function () {
-    alert('hell');
-  };
-  var timerText = document.getElementById('timer');
-  var seconds = 0, minutes = 0, hours = 0, t;
-
-  function add() {
-      seconds++;
-      if (seconds >= 60) {
-          seconds = 0;
-          minutes++;
-          if (minutes >= 60) {
-              minutes = 0;
-              hours++;
-          }
-      }
-
-      timerText.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-
-      timer();
-  }
-  function timer() {
-      t = setTimeout(add, 1000);
-      consolt.log('gi');
-  }
-  timer();
-
-
-  /* Start button */
-  start.onclick = timer;
 }
