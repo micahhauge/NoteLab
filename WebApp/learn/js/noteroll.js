@@ -158,41 +158,41 @@ function Note(pitch, startTime, duration, velocity) {
   if (this.velocity < .1) {
     this.noteColor = "#4EDC54";
   } else if (this.velocity < .15){
-      this.noteColor = "#52DC4E";
+      this.noteColor = "#55DC4E";
   } else if (this.velocity < .2) {
-    this.noteColor = "#61dc4e";
+    this.noteColor = "#5edc4e";
   } else if (this.velocity < .25) {
-    this.noteColor = "#67dc4e";
+    this.noteColor = "#65dc4e";
   } else if (this.velocity < .3) {
-    this.noteColor = "#77dc4e";
+    this.noteColor = "#6edc4e";
   } else if (this.velocity < .35) {
-    this.noteColor = "#86dc4e";
+    this.noteColor = "#75dc4e";
   } else if (this.velocity < .4) {
-    this.noteColor = "#9bdc4e";
+    this.noteColor = "#7edc4e";
   } else if (this.velocity < .45) {
-    this.noteColor = "#a6dc4e";
+    this.noteColor = "#85dc4e";
   } else if (this.velocity < .5) {
-    this.noteColor = "#bddc4e";
+    this.noteColor = "#8edc4e";
   } else if (this.velocity < .55) {
-    this.noteColor = "#d3dc4e";
+    this.noteColor = "#95dc4e";
   } else if (this.velocity < .6) {
-    this.noteColor = "#dccf4e";
+    this.noteColor = "#9edc4e";
   } else if (this.velocity < .65){
-    this.noteColor = "#dcc04e";
+    this.noteColor = "#a5dc4e";
   } else if (this.velocity < .7) {
-    this.noteColor = "#dca84e";
+    this.noteColor = "#aedc4e";
   } else if (this.velocity < .75) {
-    this.noteColor = "#dc9b4e";
+    this.noteColor = "#bedc4e";
   } else if (this.velocity < .8) {
-    this.noteColor = "#dc864e";
+    this.noteColor = "#d5dc4e";
   } else if (this.velocity < .85) {
-    this.noteColor = "#dc774e";
+    this.noteColor = "#eec54e";
   } else if (this.velocity < .9) {
-    this.noteColor = "#dc654e";
+    this.noteColor = "#eead4e";
   } else if (this.velocity < .95) {
-    this.noteColor = "#dc5b4e";
+    this.noteColor = "#ee7e4e";
   } else {
-    this.noteColor = "#dc4e4e";
+    this.noteColor = "#ee5f4e";
   }
 
   this.initialX = null;
@@ -218,45 +218,44 @@ function LiveNote(pitch, startTime, duration, velocity, graphic = null) {
   this.graphic = null;
   this.tl = new TimelineMax();
   // this.noteColor = getRandomColor();
-
   if (this.velocity < .1) {
     this.noteColor = "#4EDC54";
   } else if (this.velocity < .15){
-      this.noteColor = "#52DC4E";
+      this.noteColor = "#55DC4E";
   } else if (this.velocity < .2) {
-    this.noteColor = "#61dc4e";
+    this.noteColor = "#5edc4e";
   } else if (this.velocity < .25) {
-    this.noteColor = "#67dc4e";
+    this.noteColor = "#65dc4e";
   } else if (this.velocity < .3) {
-    this.noteColor = "#77dc4e";
+    this.noteColor = "#6edc4e";
   } else if (this.velocity < .35) {
-    this.noteColor = "#86dc4e";
+    this.noteColor = "#75dc4e";
   } else if (this.velocity < .4) {
-    this.noteColor = "#9bdc4e";
+    this.noteColor = "#7edc4e";
   } else if (this.velocity < .45) {
-    this.noteColor = "#a6dc4e";
+    this.noteColor = "#85dc4e";
   } else if (this.velocity < .5) {
-    this.noteColor = "#bddc4e";
+    this.noteColor = "#8edc4e";
   } else if (this.velocity < .55) {
-    this.noteColor = "#d3dc4e";
+    this.noteColor = "#95dc4e";
   } else if (this.velocity < .6) {
-    this.noteColor = "#dccf4e";
+    this.noteColor = "#9edc4e";
   } else if (this.velocity < .65){
-    this.noteColor = "#dcc04e";
+    this.noteColor = "#a5dc4e";
   } else if (this.velocity < .7) {
-    this.noteColor = "#dca84e";
+    this.noteColor = "#aedc4e";
   } else if (this.velocity < .75) {
-    this.noteColor = "#dc9b4e";
+    this.noteColor = "#bedc4e";
   } else if (this.velocity < .8) {
-    this.noteColor = "#dc864e";
+    this.noteColor = "#d5dc4e";
   } else if (this.velocity < .85) {
-    this.noteColor = "#dc774e";
+    this.noteColor = "#eec54e";
   } else if (this.velocity < .9) {
-    this.noteColor = "#dc654e";
+    this.noteColor = "#eead4e";
   } else if (this.velocity < .95) {
-    this.noteColor = "#dc5b4e";
+    this.noteColor = "#ee7e4e";
   } else {
-    this.noteColor = "#dc4e4e";
+    this.noteColor = "#ee5f4e";
   }
 
   this.initialX = null;

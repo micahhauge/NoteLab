@@ -106,44 +106,45 @@ function Note(pitch, startTime, duration, velocity) {
   // this.noteColor = getRandomColor();
 
   if (this.velocity < .1) {
-    this.noteColor = "#5ACF2B";
+    this.noteColor = "#4EDC54";
   } else if (this.velocity < .15){
-      this.noteColor = "#73CF2B";
+      this.noteColor = "#55DC4E";
   } else if (this.velocity < .2) {
-    this.noteColor = "#98CF2B";
+    this.noteColor = "#5edc4e";
   } else if (this.velocity < .25) {
-    this.noteColor = "#B4CF2B";
+    this.noteColor = "#65dc4e";
   } else if (this.velocity < .3) {
-    this.noteColor = "#C0CF2B";
+    this.noteColor = "#6edc4e";
   } else if (this.velocity < .35) {
-    this.noteColor = "#CFC32B";
+    this.noteColor = "#75dc4e";
   } else if (this.velocity < .4) {
-    this.noteColor = "#CFAA2B";
+    this.noteColor = "#7edc4e";
   } else if (this.velocity < .45) {
-    this.noteColor = "#CF962B";
+    this.noteColor = "#85dc4e";
   } else if (this.velocity < .5) {
-    this.noteColor = "#CF7D2B";
+    this.noteColor = "#8edc4e";
   } else if (this.velocity < .55) {
-    this.noteColor = "#CF6C2B";
+    this.noteColor = "#95dc4e";
   } else if (this.velocity < .6) {
-    this.noteColor = "#CF5F2B";
+    this.noteColor = "#9edc4e";
   } else if (this.velocity < .65){
-    this.noteColor = "#CF502B";
+    this.noteColor = "#a5dc4e";
   } else if (this.velocity < .7) {
-    this.noteColor = "#CF462B";
+    this.noteColor = "#aedc4e";
   } else if (this.velocity < .75) {
-    this.noteColor = "#CF3C2B";
+    this.noteColor = "#bedc4e";
   } else if (this.velocity < .8) {
-    this.noteColor = "#DC311D";
+    this.noteColor = "#d5dc4e";
   } else if (this.velocity < .85) {
-    this.noteColor = "#E82A14";
+    this.noteColor = "#eec54e";
   } else if (this.velocity < .9) {
-    this.noteColor = "#F3250D";
+    this.noteColor = "#eead4e";
   } else if (this.velocity < .95) {
-    this.noteColor = "#FF1B00";
+    this.noteColor = "#ee7e4e";
   } else {
-    this.noteColor = "#FF0000";
+    this.noteColor = "#ee5f4e";
   }
+
 
   this.initialX = null;
   this.len = null;
@@ -168,47 +169,46 @@ function LiveNote(pitch, startTime, duration, velocity, graphic = null) {
   this.graphic = null;
   this.tl = new TimelineMax();
   // this.noteColor = getRandomColor();
-
   if (this.velocity < .1) {
-    this.noteColor = "#5ACF2B";
+    this.noteColor = "#4EDC54";
   } else if (this.velocity < .15){
-      this.noteColor = "#73CF2B";
+      this.noteColor = "#55DC4E";
   } else if (this.velocity < .2) {
-    this.noteColor = "#98CF2B";
+    this.noteColor = "#5edc4e";
   } else if (this.velocity < .25) {
-    this.noteColor = "#B4CF2B";
+    this.noteColor = "#65dc4e";
   } else if (this.velocity < .3) {
-    this.noteColor = "#C0CF2B";
+    this.noteColor = "#6edc4e";
   } else if (this.velocity < .35) {
-    this.noteColor = "#CFC32B";
+    this.noteColor = "#75dc4e";
   } else if (this.velocity < .4) {
-    this.noteColor = "#CFAA2B";
+    this.noteColor = "#7edc4e";
   } else if (this.velocity < .45) {
-    this.noteColor = "#CF962B";
+    this.noteColor = "#85dc4e";
   } else if (this.velocity < .5) {
-    this.noteColor = "#CF7D2B";
+    this.noteColor = "#8edc4e";
   } else if (this.velocity < .55) {
-    this.noteColor = "#CF6C2B";
+    this.noteColor = "#95dc4e";
   } else if (this.velocity < .6) {
-    this.noteColor = "#CF5F2B";
+    this.noteColor = "#9edc4e";
   } else if (this.velocity < .65){
-    this.noteColor = "#CF502B";
+    this.noteColor = "#a5dc4e";
   } else if (this.velocity < .7) {
-    this.noteColor = "#CF462B";
+    this.noteColor = "#aedc4e";
   } else if (this.velocity < .75) {
-    this.noteColor = "#CF3C2B";
+    this.noteColor = "#bedc4e";
   } else if (this.velocity < .8) {
-    this.noteColor = "#DC311D";
+    this.noteColor = "#d5dc4e";
   } else if (this.velocity < .85) {
-    this.noteColor = "#E82A14";
+    this.noteColor = "#eec54e";
   } else if (this.velocity < .9) {
-    this.noteColor = "#F3250D";
+    this.noteColor = "#eead4e";
   } else if (this.velocity < .95) {
-    this.noteColor = "#FF1B00";
+    this.noteColor = "#ee7e4e";
   } else {
-    this.noteColor = "#FF0000";
+    this.noteColor = "#ee5f4e";
   }
-
+  
   this.initialX = null;
   this.len = null;
 
