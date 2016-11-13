@@ -5,7 +5,7 @@ $(document).ready( function(){
 });
 
 // Save midi file off to the server
-function saveMidi(midiContent, targetFile){
+function saveMidi(midiContent,user,targetFile){
 	$.ajax({
 		type: "POST",
 		url: host+"savemidi.php",
@@ -14,7 +14,8 @@ function saveMidi(midiContent, targetFile){
 		},
 		data:{
 			midiContent:midiContent,
-			targetFile:targetFile
+			targetFile:targetFile,
+			user:user
 		},
 		
 		fail:function(data){
@@ -45,15 +46,17 @@ function loadMidiList(){
 }
 
 
-function loadMidi(midiFile){
+function loadMidi(user,midiFile){
 	$.ajax({
 		type: "POST",
 		url: host+"loadMidiContent.php",
 		success:function(data) {
+			alert(data);
 			return data;
 		},
 		data:{
-			fileName:midiFile
+			fileName:midiFile,
+			user:user
 		},
 		fail:function(data){
 			alert("FAIL");

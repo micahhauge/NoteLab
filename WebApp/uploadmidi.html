@@ -5,9 +5,12 @@
 		<script src="js/saveloadmidi.js"></script>
 	</head>
 	<body>
-		<button onclick="saveMidi('midi', 'myFile.txt')">Save Midi</button>
-		<input type="text" id="midiFileName" placeholder="load"/>
-		<button onclick="loadMidi($('#midiFileName').val())">Load Midi</button>
+		<button onclick="loadMidi($('#userName').val(),$('#midiFileName').val())">Load Midi</button>
+		<button onclick="saveMidi('MIDI CONTENT',$('#userName').val(), $('#midiFileName').val())">Save Midi</button>
+		<input type="text" id="midiFileName" placeholder="Song Name"/>
+		<input type="text" id="userName" placeholder="User Name"/></br>
+		
+		
 		<ul id="midiFiles">
 			
 		</ul>
