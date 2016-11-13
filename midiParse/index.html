@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Micah's MIDI Parser</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+   <!-- bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- master css -->
+	<!-- <link rel="stylesheet" type="text/css" media="screen" href="css/master.css" /> -->
+
+</head>
+<body>
+  <center>
+    <h1>Micah's MIDI Parser</h1>
+    <p style='margin-top: 50px'>
+      1) Place midi files in 'input'
+      <br />
+      2) enter the number of input files below
+      <br />
+      3) name the files in the following manner index_.mid    (ex: 1_.mid 2_.mid)
+    </p>
+    <input id='numOfFiles' type="number">
+    <br />
+    <button type="button" class="btn btn-lg btn-primary" onClick="run();">Run</button>
+  </center>
+
+
+  <!-- javascript -->
+	<!-- <script type='text/javascript' src='http://www.midijs.net/lib/midi.js'></script> -->
+  <script src="js/MidiConvert.js"></script>
+  <script src="js/parse.js"></script>
+  <!-- <script src="js/setup.js"></script> -->
+  <!-- <script src="js/main.js"></script> -->
+</body>
+</html>

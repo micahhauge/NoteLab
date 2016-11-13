@@ -44,12 +44,14 @@ def GenCenterInline(measure):
     testCenter = [0.0,0.0,0.0,0.0]
     count = 0
     for i in measure: #loop through each note per measure
-        for j in measure[i]: #loop through each value per note
-            testCenter[int(j)] += measure[i][j]
-        count += 1
+            testCenter[0] += measure[i]['start']
+            testCenter[1] += measure[i]['velocity']
+            testCenter[2] += measure[i]['duration']
+            testCenter[3] += measure[i]['pitch']
+            count += 1
 
     for i in range(4):
-        testCenter[j] /= count
+        testCenter[i] /= count
 
     return testCenter
 
@@ -58,7 +60,7 @@ def CompCenters(cen1,cen2):
     return math.sqrt((cen2[0]-cen1[0])**2+(cen2[1]-cen1[1])**2+(cen2[2]-cen1[2])**2+(cen2[3]-cen1[3])**2)
 
 # population is test data, trainingData is used to compare center
-def ReturnBest(population, trainingData):
+def ReturnBest(trainingData):
     global fit
     fit = {} #dict of all good measures
     centers = {} #list of all centers of all measures, to be combed through later
@@ -70,11 +72,16 @@ def ReturnBest(population, trainingData):
 
     topPercent *= .2 #20% of total
     topPercent = int(topPercent)
-
+    topPercent = 7
+    for i in range(1, topPercent + 1):
+        fit[i] = {}
+    #print(fit)
     for i in range(topPercent):
-        fit[sortedCenters[2*i]] = population[sortedCenters[2*i]]
 
-    return fit
+        fit[sortedCenters[i][0]] = population[sortedCenters[i][0]]
+
+    return
+
 def iterator(iterable):
     for i in iterable:
         yield i
@@ -104,7 +111,7 @@ class pop:
             'start' : random.randint(0,lengthOfMeasures*100),
             'duration' : random.randint(1,lengthOfMeasures*100),
             'pitch' : random.randint(21,109),
-            'velocity' : random.random()}
+            'velocity' : random.randint(80,120)/100}
             notes.insert(0, note)
     def measures():
         kount = 0
@@ -140,26 +147,39 @@ class pop:
 
     def writeTxt():
         for i in population:
-            with open('output' + i + '.txt', 'w') as outp:
+            with open('output' + str(i) + '.txt', 'w') as outp:
                 for note in population[i]:
                     outp.write(str(population[i][note]['start']) + ' ' + str(population[i][note]['duration']) + ' ' + str(population[i][note]['pitch']) + ' ' + str((population[i][note]['velocity'])) + '\n')
     def writeMidi():
+        #print(population)
+        channel = 0
+        track = 0
+        time = 0
         for i in population:
             mf = MIDIFile(numTracks = 1, adjust_origin=True)
-            measure = next(iterator(population[i]))
-            pitch = population[i][measure]['pitch']
-            start = population[i][measure]['start']
-            duration = population[i][measure]['duration']
-            velocity = int((population[i][measure]['velocity'])*255)
-            mf.addNote(0, 0, pitch, start, duration, velocity)
-            with open("output" + i + ".mid", "wb") as outf:
+            mf.addTrackName(track, time, 'main')
+            mf.addTempo(track, time, 240)
+            #print(i)
+            for note in population[i]:
+                pitch = population[i][note]['pitch']
+                time = population[i][note]['start']
+                duration = population[i][note]['duration'] / 10
+                velocity = int((population[i][note]['velocity'])*100)
+                mf.addNote(channel, track, pitch, time, duration, velocity)
+
+
+            with open("output" + str(i) + ".mid", "wb") as outf:
                 mf.writeFile(outf)
+
 def main():
-    pop.info(15, 4, 120, 100)
+    trainer = GenCenter('./ai/Train', '/')
+    pop.info(25, 8, 240, 35)
     pop.create()
     pop.measures()
+    for i in range(100):
+        ReturnBest(trainer)
+        pop.breed
     pop.writeTxt()
-    pop.breed()
     pop.writeMidi()
 
 
