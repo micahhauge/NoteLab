@@ -180,50 +180,26 @@ class pop:
         return population
 
     def pitcher():
-        a = [
-        21,33,45,57,69,81,93,105
-        ]
-        bb = [
-        22,34,46,58,70,82,94,106
-        ]
-        b = [
-        23,35,47,59,71,83,95,107
-        ]
-        c = [
-        24,36,48,60,72,84,96,108
-        ]
-        db = [
-        25,37,49,61,73,85,97
-        ]
-        d = [
-        26,38,50,62,74,86,98
-        ]
-        eb = [
-        27,39,51,63,75,87,99
-        ]
-        e = [
-        28,40,52,64,76,88,100
-        ]
-        f = [
-        29,41,53,65,77,89,101
-        ]
-        gb = [
-        30,42,54,66,78,90,102
-        ]
-        g = [
-        31,43,55,67,79,91,103
-        ]
-        ab = [
-        32,44,56,68,80,92,104
-        ]
-        keyC = 0
+        a = 9
+        bb = 10
+        b = 11
+        c = 0
+        db = 1
+        d = 2
+        eb = 3
+        e = 4
+        f = 5
+        gb = 6
+        g = 7
+        ab = 8
         C = [a,b,c,d,e,f,g]
-        keyG = 0
+        keyC = 0
         G = [a,b,c,d,e,gb,g]
-        keyD = 0
+        keyG = 0
         D = [a,b,db,d,e,gb,g]
-        keyA = 0
+        keyD = 0
         A = [a,b,db,d,e,gb,ab]
+        keyA = 0
         E = [a,b,db,eb,e,gb,ab]
         keyE = 0
         B = [a,b,db,eb,e,gb,ab]
@@ -344,7 +320,7 @@ class pop:
             keyList = [Gb,B,E,A,D,G,C,Db,F,Bb,Eb,Ab]
             measureKey = keyList[kountList.index(max(kountList))]
             for j in population[i]:
-                if population[i][j]['pitch'] == any(measureKey):
+                if population[i][j]['pitch'] % 12 in measureKey:
                     pass
                 else:
                     population[i][j]['pitch'] += 1
@@ -398,7 +374,7 @@ class pop:
 
 def main():
     trainer = GenCenter('/')
-    pop.info(45, 4, 240, 35)
+    pop.info(125, 8, 240, 35)
     pop.create()
     pop.measures()
     for i in range(int(sys.argv[2])):
@@ -406,8 +382,8 @@ def main():
         pop.breed
 
     #pop.writeTxt()
-    pop.pitcher()
     pop.smoother()
+    pop.pitcher()
     pop.writeMidi()
 
 
