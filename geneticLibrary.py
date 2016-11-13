@@ -193,23 +193,181 @@ class pop:
         24,36,48,60,72,84,96,108
         ]
         db = [
-        25,37,48,60,72,85,97
+        25,37,49,61,73,85,97
         ]
         d = [
-        26,38,49,61,73,86,98
+        26,38,50,62,74,86,98
         ]
-    #    keyC =
-    #    keyG =
-    #    keyD =
-    #    keyA =
-    #    keyE =
-    #    keyB =
-    #    keyF =
-    #    keyGb =
-    #    keyDb =
-    #    keyAb =
-    #    keyEb =
-    #    keyBb =
+        eb = [
+        27,39,51,63,75,87,99
+        ]
+        e = [
+        28,40,52,64,76,88,100
+        ]
+        f = [
+        29,41,53,65,77,89,101
+        ]
+        gb = [
+        30,42,54,66,78,90,102
+        ]
+        g = [
+        31,43,55,67,79,91,103
+        ]
+        ab = [
+        32,44,56,68,80,92,104
+        ]
+        keyC = 0
+        C = [a,b,c,d,e,f,g]
+        keyG = 0
+        G = [a,b,c,d,e,gb,g]
+        keyD = 0
+        D = [a,b,db,d,e,gb,g]
+        keyA = 0
+        A = [a,b,db,d,e,gb,ab]
+        E = [a,b,db,eb,e,gb,ab]
+        keyE = 0
+        B = [a,b,db,eb,e,gb,ab]
+        keyB = 0
+        F = [a,bb,c,d,e,f,g]
+        keyF = 0
+        Gb = [bb,b,db,eb,f,gb,ab]
+        keyGb = 0
+        Db = [ab,bb,c,db,eb,f,gb]
+        keyDb = 0
+        Ab = [ab,bb,c,db,eb,f,g]
+        keyAb = 0
+        Eb = [ab,bb,c,d,eb,f,g]
+        keyEb = 0
+        Bb = [a,bb,c,d,eb,f,g]
+        keyBb = 0
+        for i in population:
+            for j in population[i]:
+                notePitch = population[i][j]['pitch'] % 12
+                if notePitch == 0:
+                    keyC += 1
+                    keyG += 1
+                    keyF += 1
+                    keyDb += 1
+                    keyAb += 1
+                    keyEb += 1
+                    keyBb += 1
+                if notePitch == 1:
+                    keyD += 1
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyGb += 1
+                    keyDb += 1
+                    keyAb += 1
+                if notePitch == 2:
+                    keyC += 1
+                    keyG += 1
+                    keyD += 1
+                    keyA += 1
+                    keyF += 1
+                    keyEb += 1
+                    keyBb += 1
+                if notePitch == 3:
+                    keyE += 1
+                    keyB += 1
+                    keyGb += 1
+                    keyDb += 1
+                    keyAb += 1
+                    keyEb += 1
+                    keyBb += 1
+                if notePitch == 4:
+                    keyC += 1
+                    keyG += 1
+                    keyD += 1
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyF += 1
+                if notePitch == 5:
+                    keyC += 1
+                    keyF += 1
+                    keyGb += 1
+                    keyDb += 1
+                    keyAb += 1
+                    keyEb += 1
+                    keyBb += 1
+                if notePitch == 6:
+                    keyG += 1
+                    keyD += 1
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyGb += 1
+                    keyDb += 1
+                if notePitch == 7:
+                    keyC += 1
+                    keyG += 1
+                    keyD += 1
+                    keyF += 1
+                    keyAb += 1
+                    keyEb += 1
+                    keyBb += 1
+                if notePitch == 8:
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyGb += 1
+                    keyDb += 1
+                    keyAb += 1
+                    keyEb += 1
+                if notePitch == 9:
+                    keyC += 1
+                    keyG += 1
+                    keyD += 1
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyF += 1
+                    keyBb += 1
+                if notePitch == 10:
+                    keyG += 1
+                    keyD += 1
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyGb += 1
+                    keyDb += 1
+                if notePitch == 11:
+                    keyC += 1
+                    keyG += 1
+                    keyD += 1
+                    keyA += 1
+                    keyE += 1
+                    keyB += 1
+                    keyGb += 1
+            kountList = [keyGb,keyB,keyE,keyA,keyD,keyG,keyC,keyDb,keyF,keyBb,keyEb,keyAb]
+            keyList = [Gb,B,E,A,D,G,C,Db,F,Bb,Eb,Ab]
+            measureKey = keyList[kountList.index(max(kountList))]
+            for j in population[i]:
+                if population[i][j]['pitch'] == any(measureKey):
+                    pass
+                else:
+                    population[i][j]['pitch'] += 1
+
+
+
+
+    def smoother():
+        for measure in population:
+            total = 0
+            ave = 0
+            for note in population[measure]:
+                total += 1
+                ave += population[measure][note]['pitch']
+            ave /= total
+
+            for note in population[measure]: #2nd pass to adjust
+                if ave - population[measure][note]['pitch'] > 12:
+                    population[measure][note]['pitch'] += 24
+                elif ave - population[measure][note]['pitch'] < -12:
+                    population[measure][note]['pitch'] -= 24
+
+
 
 
     def writeTxt():
@@ -248,6 +406,8 @@ def main():
         pop.breed
 
     #pop.writeTxt()
+    pop.pitcher()
+    pop.smoother()
     pop.writeMidi()
 
 
