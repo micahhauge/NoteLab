@@ -111,25 +111,33 @@ class pop:
         global population
         population = {}
         for i in range(1, numOfMeasures + 1):
-            population['m' + str(i)] = {}
+            population[i] = {}
         for j in notes:
             kount += 1
-            population['m' + str(random.randint(1,numOfMeasures))]['note' + str(kount)] = j
-
-
+            population[random.randint(1,numOfMeasures)]['note' + str(kount)] = j
 
     def breed():
-        measurable = iterator(fit)
-        kount = 0
-        nKount = 0
+        count = 1 #used in indexing new bred songs
         for i in range(1, numOfMeasures + 1):
-            population['m' + str(i)] = {}
-        for j in fit:
-            for k in fit:
-                kount += 1
-                for l in fit[]
-                k = j + 1
-                measure = fit[j]
+            population[i] = {}
+
+        for i in range(len(fit)-1): # 0 to 6
+            i += 1 # now 1 to 6
+            j = i + 1
+            while (j < 8): # j goes from (i + 1) to 7 each time
+                shorterID = i if (len(fit[i]) < len(fit[j])) else j # measure with fewer notes
+                for k in fit[shorterID]: # loop through each note of shorter measure
+                    for l in fit[shorterID][k]: # loop through each value inside of each note
+                        if l != 'velocity': #don't floor if velocity
+                            population[count][k][l] = (fit[i][k][l] + fit[j][k][l])/2
+                        else:
+                            population[count][k][l] = math.floor( (fit[i][k][l] + fit[j][k][l])/2 )
+                count += 1 # increment count for next ID of new
+
+        return population
+
+
+
     def writeTxt():
         for i in population:
             with open('output' + i + '.txt', 'w') as outp:
