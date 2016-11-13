@@ -1,4 +1,5 @@
 import random
+import time
 from midiutil.MidiFile import MIDIFile
 import math
 import time
@@ -9,8 +10,11 @@ from os import listdir
 from os.path import isfile, join
 import operator #used for sorting dict parsing
 
+random.seed(time.time())
+
 # for training data
-def GenCenter(songDir,dirSep):
+def GenCenter(dirSep):
+    songDir = sys.argv[1]
     index = 0
 
     musicFiles = [f for f in listdir(songDir) if isfile(join(songDir, f))]
@@ -34,7 +38,7 @@ def GenCenter(songDir,dirSep):
                 for i in range(4):
                    songProp[i] = float(songProp[i].replace('\n',''))
                    trainCenter[i] += songProp[i]
-                   variance.append(songProp[i])
+                   variance.append(songProp)
             count += 1
 
     # find average
@@ -42,31 +46,48 @@ def GenCenter(songDir,dirSep):
         trainCenter[i] /= count
 
     # squared deviations into variance[][]
-    for i in variance:
+    for i in range(len(variance)):
         for j in range(4):
             variance[i][j] = ( (variance[i][j] - trainCenter[j])**2 )
             total[j] += variance[i][j]
-    
+
     # average out variance
     for i in range(4):
         total[i] /= count
+        # amend trainCenter to be average between trainCenter and std
         trainCenter[i] = (trainCenter[i]+total[i])/2
-    
+
     return trainCenter
 
 # Be sure to pass a measure as argument and not the population
 def GenCenterInline(measure):
-    testCenter = [0.0,0.0,0.0,0.0]
+    testCenter =[0.0,0.0,0.0,0.0]
+    total = [0.0,0.0,0.0,0.0]
+    variance = []
     count = 0
     for i in measure: #loop through each note per measure
             testCenter[0] += measure[i]['start']
-            testCenter[1] += measure[i]['velocity']
-            testCenter[2] += measure[i]['duration']
-            testCenter[3] += measure[i]['pitch']
+            testCenter[1] += measure[i]['duration']
+            testCenter[2] += measure[i]['pitch']
+            testCenter[3] += measure[i]['velocity']
+            temp = [measure[i]['start'], measure[i]['duration'], measure[i]['pitch'], measure[i]['velocity']]
+            variance.append(temp)
             count += 1
 
     for i in range(4):
         testCenter[i] /= count
+
+    # squared deviations into variance[][]
+    for i in range(len(variance)):
+        for j in range(4):
+            variance[i][j] = ( (variance[i][j] - testCenter[j])**2 )
+            total[j] += variance[i][j]
+
+    # average out variance
+    for i in range(4):
+        total[i] /= count
+        # amend trainCenter to be average between trainCenter and std
+        testCenter[i] = (testCenter[i]+total[i])/2
 
     return testCenter
 
@@ -125,7 +146,7 @@ class pop:
             note = {
             'start' : random.randint(0,lengthOfMeasures*100),
             'duration' : random.randint(1,lengthOfMeasures*100),
-            'pitch' : random.randint(21,109),
+            'pitch' : random.randint(21,108),
             'velocity' : random.randint(80,120)/100}
             notes.insert(0, note)
     def measures():
@@ -158,6 +179,37 @@ class pop:
 
         return population
 
+    def pitcher():
+        a = [
+        21,33,45,57,69,81,93,105
+        ]
+        bb = [
+        22,34,46,58,70,82,94,106
+        ]
+        b = [
+        23,35,47,59,71,83,95,107
+        ]
+        c = [
+        24,36,48,60,72,84,96,108
+        ]
+        db = [
+        25,37,48,60,72,85,97
+        ]
+        d = [
+        26,38,49,61,73,86,98
+        ]
+    #    keyC =
+    #    keyG =
+    #    keyD =
+    #    keyA =
+    #    keyE =
+    #    keyB =
+    #    keyF =
+    #    keyGb =
+    #    keyDb =
+    #    keyAb =
+    #    keyEb =
+    #    keyBb =
 
 
     def writeTxt():
@@ -183,18 +235,19 @@ class pop:
                 mf.addNote(channel, track, pitch, time, duration, velocity)
 
 
-            with open("output" + str(i) + ".mid", "wb") as outf:
+            with open("./midiOut/output" + str(i) + ".mid", "wb") as outf:
                 mf.writeFile(outf)
 
 def main():
-    trainer = GenCenter('./ai/Train', '/')
-    pop.info(25, 8, 240, 35)
+    trainer = GenCenter('/')
+    pop.info(45, 4, 240, 35)
     pop.create()
     pop.measures()
-    for i in range(100):
+    for i in range(int(sys.argv[2])):
         ReturnBest(trainer)
         pop.breed
-    pop.writeTxt()
+
+    #pop.writeTxt()
     pop.writeMidi()
 
 
