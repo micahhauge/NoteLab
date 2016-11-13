@@ -108,39 +108,39 @@ function Note(pitch, startTime, duration, velocity) {
   if (this.velocity < .1) {
     this.noteColor = "#5ACF2B";
   } else if (this.velocity < .15){
-      this.noteColor = "73CF2B";
+      this.noteColor = "#73CF2B";
   } else if (this.velocity < .2) {
     this.noteColor = "#98CF2B";
   } else if (this.velocity < .25) {
-    this.noteColor = "B4CF2B";
+    this.noteColor = "#B4CF2B";
   } else if (this.velocity < .3) {
     this.noteColor = "#C0CF2B";
   } else if (this.velocity < .35) {
-    this.noteColor = "CFC32B";
+    this.noteColor = "#CFC32B";
   } else if (this.velocity < .4) {
     this.noteColor = "#CFAA2B";
   } else if (this.velocity < .45) {
-    this.noteColor = "CF962B";
+    this.noteColor = "#CF962B";
   } else if (this.velocity < .5) {
     this.noteColor = "#CF7D2B";
   } else if (this.velocity < .55) {
-    this.noteColor = "CF6C2B";
+    this.noteColor = "#CF6C2B";
   } else if (this.velocity < .6) {
     this.noteColor = "#CF5F2B";
   } else if (this.velocity < .65){
-    this.noteColor = "CF502B";
+    this.noteColor = "#CF502B";
   } else if (this.velocity < .7) {
     this.noteColor = "#CF462B";
   } else if (this.velocity < .75) {
-    this.noteColor = "CF3C2B";
+    this.noteColor = "#CF3C2B";
   } else if (this.velocity < .8) {
     this.noteColor = "#DC311D";
   } else if (this.velocity < .85) {
-    this.noteColor = "E82A14";
+    this.noteColor = "#E82A14";
   } else if (this.velocity < .9) {
     this.noteColor = "#F3250D";
   } else if (this.velocity < .95) {
-    this.noteColor = "FF1B00";
+    this.noteColor = "#FF1B00";
   } else {
     this.noteColor = "#FF0000";
   }
