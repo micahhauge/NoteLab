@@ -111,7 +111,7 @@ class pop:
             'start' : random.randint(0,lengthOfMeasures*100),
             'duration' : random.randint(1,lengthOfMeasures*100),
             'pitch' : random.randint(21,109),
-            'velocity' : random.randint(40,120)/100}
+            'velocity' : random.randint(80,120)/100}
             notes.insert(0, note)
     def measures():
         kount = 0
@@ -176,7 +176,7 @@ def main():
     pop.info(25, 8, 240, 35)
     pop.create()
     pop.measures()
-    for i in range(10000):
+    for i in range(100):
         ReturnBest(trainer)
         pop.breed
     pop.writeTxt()
