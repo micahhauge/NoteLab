@@ -18,6 +18,8 @@ def GenCenter(songDir,dirSep):
     songIndex = 0
     songProp = []
     trainCenter = [0.0,0.0,0.0,0.0]
+    total = [0.0,0.0,0.0,0.0]
+    variance = [] #variance will be a list of lists, holding start, duration, pitch, velocity of each song
     count = 0
 
     for mFile in musicFiles:
@@ -32,11 +34,24 @@ def GenCenter(songDir,dirSep):
                 for i in range(4):
                    songProp[i] = float(songProp[i].replace('\n',''))
                    trainCenter[i] += songProp[i]
+                   variance.append(songProp[i])
             count += 1
 
+    # find average
     for i in range(4):
         trainCenter[i] /= count
 
+    # squared deviations into variance[][]
+    for i in variance:
+        for j in range(4):
+            variance[i][j] = ( (variance[i][j] - trainCenter[j])**2 )
+            total[j] += variance[i][j]
+    
+    # average out variance
+    for i in range(4):
+        total[i] /= count
+        trainCenter[i] = (trainCenter[i]+total[i])/2
+    
     return trainCenter
 
 # Be sure to pass a measure as argument and not the population
